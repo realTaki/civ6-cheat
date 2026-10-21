@@ -1,7 +1,5 @@
 const _ = require('lodash');
 const fs = require('fs');
-const path = require('path');
-const util = require('util');
 const zlib = require('zlib');
 const iconv = require('iconv-lite');
 const diacritics = require('diacritics');
@@ -238,11 +236,9 @@ if (!module.parent) {
 
 function findGoldPos(idx, buffer) {
   // Gold value position can be found by three 4 byte markers
-  let match;
   let i = 0;
   let pos = 0;
   while (pos > -1) {
-    match = false;
     pos = buffer.indexOf(MONEY_MARKERS[0], pos);
     if (pos > -1) {
       if (Buffer.compare(buffer.slice(pos + 8, pos + 12), MONEY_MARKERS[1]) === 0) {
@@ -280,7 +276,7 @@ function readGold(idx, buffer) {
 }
 
 function writeGold(idx, buffer, gold) {
-  const value = gold * 256
+  const value = gold * 256;
 
   const pos = findGoldPos(idx, buffer);
   if (pos === -1) {
@@ -363,8 +359,7 @@ function printMainMenu(rl, saveFile, result) {
     if (isNaN(answer)) {
       // invalid answer, retry
       printMainMenu(rl, saveFile, result);
-    }
-    else if (answer === 0) {
+    } else if (answer === 0) {
       // save & exit
       rl.close();
       save(saveFile, result);
