@@ -597,7 +597,7 @@ function writeString(marker, newValue) {
   const strLenBuffer = Buffer.from([0, 0, 0, 0x21, 1, 0, 0, 0]);
   strLenBuffer.writeUInt16LE(safeValue.length + 1, 0);
 
-  return Buffer.concat([marker, Buffer.from([5, 0, 0, 0]), strLenBuffer, myBufferFrom(safeValue), Buffer.from([0])]);
+  return Buffer.concat([marker, Buffer.from([5, 0, 0, 0]), strLenBuffer, Buffer.from(safeValue), Buffer.from([0])]);
 }
 
 function readUtfString(buffer, state) {
